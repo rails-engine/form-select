@@ -17,16 +17,21 @@ app/model/category.rb
 ```rb
 class Category
   form_select :name, scope: -> { order("name asc") }
-  form_select :reverse_name, text_method: :name, scope: -> { order("name desc") }
+  form_select :reverse_name, field: [:name, :id], scope: -> { order("name desc") }
 end
 
 class User
-  form_select :login, value_method: :to_param, scope: -> { order("id desc") }
+  form_select :login, field: [:login, :to_param], scope: -> { order("id desc") }
   form_select :email
+  form_select :email_value, field: [:email]
 
   def to_param
     login.downcase
   end
+end
+
+class Post
+  form_select :author, field: [:author], scope: -> { where("author is not null").select(:author).distinct }
 end
 ```
 
@@ -41,6 +46,10 @@ irb> User.login_options
  => [["Foo", "foo"], ["Mike", "mike"], ["Jason", "jason"]]
 irb> User.email_options
  => [["jason@gmail.com", 10], ["mike@foo.com", 11], ["foo@bar.com", 12]]
+irb> User.email_value_options
+ => [["jason@gmail.com", "jason@gmail.com"], ["mike@foo.com", "mike@foo.com"], ["foo@bar.com", "foo@bar.com"]]
+irb> Post.author_options
+ => [["Jason", "Jason"], ["Mike", "Mike"], ["Foor", "Foo"]]
 ```
 
 So you can easy use it in Rails form:

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    form-select (0.1.0)
+    form-select (0.2.0)
       rails (>= 4.2)
 
 GEM

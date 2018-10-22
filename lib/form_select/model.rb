@@ -14,7 +14,8 @@ module FormSelect
       #
       #   class User < ApplicationRecord
       #     form_select :name, scope: -> { order("name asc") }
-      #     form_select :email, text_method: :name, value_method: :email, scope: -> { where(status: :active).order("id desc") }
+      #      form_select :name_value, field: [:name], scope: -> { order("name asc") }
+      #     form_select :email, field: [:name, :email], scope: -> { where(status: :active).order("id desc") }
       #   end
       #
       #   <div class="field">
@@ -26,11 +27,18 @@ module FormSelect
       #     <%= form.select :email, User.email_options %>
       #   </div>
       #
-      def form_select(method, text_method: nil, value_method: nil, scope: nil)
+      def form_select(method, field: nil, scope: nil)
         method_name = "#{method}_options"
 
-        text_method ||= method
-        value_method ||= primary_key
+        if field.blank?
+          text_method ||= method
+          value_method ||= primary_key
+        else
+          field = [field] unless field.is_a?(Array)
+          text_method = field.first
+          value_method = field.last
+        end
+
         scope ||= -> { all }
 
         define_singleton_method(method_name) do
