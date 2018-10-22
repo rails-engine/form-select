@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+web:
+  id: 22
+  name: Web
+
+mysql:
+  id: 23
+  name: MySQL
+
+rails:
+  id: 24
+  name: Rails

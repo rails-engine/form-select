@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jason:
+  id: 10
+  login: Jason
+  email: jason@gmail.com
+
+mike:
+  id: 11
+  login: Mike
+  email: mike@foo.com
+
+foo:
+  id: 12
+  login: Foo
+  email: foo@bar.com
