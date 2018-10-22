@@ -23,7 +23,8 @@ end
 class User
   form_select :login, field: [:login, :to_param], scope: -> { order("id desc") }
   form_select :email
-  form_select :email_value, field: [:email]
+  form_select :email_value, field: :email
+  form_select :city, field: :city, scope: -> { where("city is not null").select(:city).distinct }
 
   def to_param
     login.downcase
@@ -48,6 +49,8 @@ irb> User.email_options
  => [["jason@gmail.com", 10], ["mike@foo.com", 11], ["foo@bar.com", 12]]
 irb> User.email_value_options
  => [["jason@gmail.com", "jason@gmail.com"], ["mike@foo.com", "mike@foo.com"], ["foo@bar.com", "foo@bar.com"]]
+irb> User.city_options
+ => [["NewYork", "NewYork"], ["San Francisco", "San Francisco"], ["Chicago", "Chicago"]]
 irb> Post.author_options
  => [["Jason", "Jason"], ["Mike", "Mike"], ["Foor", "Foo"]]
 ```
@@ -64,6 +67,11 @@ So you can easy use it in Rails form:
   <div class="field">
     <%= form.label :user_id %>
     <%= form.select :user_id, User.email_options %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.select :city, User.city_options %>
   </div>
 
   <div class="field">

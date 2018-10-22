@@ -14,9 +14,11 @@ module FormSelect
       #
       #   class User < ApplicationRecord
       #     form_select :name, scope: -> { order("name asc") }
-      #      form_select :name_value, field: [:name], scope: -> { order("name asc") }
+      #     form_select :name_value, field: :name, scope: -> { order("name asc") }
       #     form_select :email, field: [:name, :email], scope: -> { where(status: :active).order("id desc") }
+      #     form_select :city, field: :city, scope: -> { where("city is not null").select(:city).distinct }
       #   end
+      #
       #
       #   <div class="field">
       #     <%= form.label :user_id %>
