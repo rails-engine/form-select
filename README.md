@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/rails-engine/form-select.svg?branch=master)](https://travis-ci.org/rails-engine/form-select)
 
+[中文介绍与说明](https://ruby-china.org/topics/37668)
+
 A simple improve for Rails form select helper.
 
 We need use `form.select ::category_id, Category.collect { |record| [record.name, record.id] }` in so many case.
