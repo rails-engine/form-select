@@ -34,7 +34,7 @@ module FormSelect
 
         if field.blank?
           text_method ||= method
-          value_method ||= primary_key
+          value_method ||= :id
         else
           field = [field] unless field.is_a?(Array)
           text_method = field.first

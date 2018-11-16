@@ -1,3 +1,9 @@
+## 0.3.2
+
+- Use `:id` as default instead of `primary_key` for avoid hit db on Rails initialize.
+  - This issue will break assets:precompile.
+- Fix loading error.
+
 ## 0.3.0
 
 - Remove unless engine.rb
